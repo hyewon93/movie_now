@@ -48,7 +48,7 @@ const Movies = () => {
             <Stack direction="row" flexWrap="wrap" justifyContent="center" gap={2}>
                 {movies.map((movie, idx) => (
                     <Box key={idx}>
-                        <ContentCard item={movie} />
+                        <ContentCard type="movies" item={movie} />
                     </Box>
                 ))}
             </Stack>
