@@ -1,19 +1,8 @@
 import { AppBar, Box, Button, Container, Toolbar } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 
 import logo from "../assets/movienow_logo.png";
 
-const Navbar = () => {
-
-    const [path, setPath] = useState("/");
-
-    const navigate = useNavigate();
-
-    useEffect(() => {
-      navigate(path);
-    }, [path])
-    
+const Navbar = ({ path, setPath }) => {
 
     return (
         <AppBar position="static" sx={{ background: "#000" }}>
