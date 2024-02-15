@@ -19,7 +19,7 @@ const ContentCard = ({ type, item }) => {
           <Typography variant="subtitle2" color="#fff" sx={{ mt: 1}}>
             {type === "movie" ? item.release_date : ""}
           </Typography>
-          <Typography variant="subtitle2" color="#fff" justifyContent="center" sx={{ display: 'flex', alignItems: 'center'}}>
+          <Typography variant="subtitle2" color="#fff" justifyContent="center" sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold'}}>
             <StarIcon sx={{ fontSize: 15, color: '#f8cc3f', mr: '5px' }} />
             {item.vote_average.toFixed(2)}
           </Typography>

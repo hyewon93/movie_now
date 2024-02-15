@@ -2,3 +2,15 @@
     color: #e67300;
     border: 2px solid #e67300;
 }
+
+.bannerButton {
+    color: #e67300 !important;
+    border: 2px solid #e67300 !important;
+    padding: 0.5em 0.7em !important;
+}
+
+.bannerButton:hover {
+    color: #fff !important;
+    background-color: #e67300 !important;
+    padding: 0.5em 0.7em !important;
+}
