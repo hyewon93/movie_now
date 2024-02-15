@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Movies from "./components/Movies";
 import Tvshows from "./components/Tvshows";
 import { useEffect, useState } from "react";
+import MovieDetail from "./components/MovieDetail";
 
 const App = () => {
   const [path, setPath] = useState("/");
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/" exact element={<Home />}></Route>
         <Route path="/movies" exact element={<Movies />}></Route>
         <Route path="/tvshows" exact element={<Tvshows />}></Route>
+        <Route path="/movie/:id" exact element={<MovieDetail />}></Route>
       </Routes>
     </Box>
   );

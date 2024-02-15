@@ -2,6 +2,7 @@ import { Box, Button, Card, CardMedia, Stack, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { fetchFromAPI } from '../utils/fetchFromAPI';
 import StarIcon from '@mui/icons-material/Star';
+import { Link } from 'react-router-dom';
 
 const HomeBanner = ({ item }) => {
 
@@ -44,7 +45,9 @@ const HomeBanner = ({ item }) => {
                     </Typography>
                 </Box>
                 <Box sx={{ height: '20%' }}>
-                    <Button className="bannerButton">Detail</Button>
+                    <Link to={`/movie/${item.id}`}>
+                        <Button className="bannerButton">Detail</Button>
+                    </Link>
                 </Box>
             </Stack>
         </Stack>
