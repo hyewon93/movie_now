@@ -12,10 +12,10 @@ const MovieDetail = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        const detail_data = fetchFromAPI(`movie/${id}`)
+        const detail_data = fetchFromAPI(`movie/${id}?append_to_response=videos`)
         .then((data) => setDetail(data));
 
-        const keyword_data = fetchFromAPI(`movie/${id}/keywords`)
+        const keywords_data = fetchFromAPI(`movie/${id}/keywords`)
         .then((data) => setKeywords(data.keywords));
     }, []);
 
@@ -62,6 +62,24 @@ const MovieDetail = () => {
                                 ))}
                             </Box>
                         </Box>
+                    </Stack>
+                </Box>
+                
+                <Box mt={10} pt={3} sx={{ borderTop: '1px solid gray' }}>
+                    <Typography variant='h4'>Trailers</Typography>
+                    <Stack direction="row" gap={5} mt={2}> 
+                        {detail && detail.videos.results.map((video, idx) => (
+                            <Box>
+                                <iframe
+                                    src={`https://www.youtube.com/embed/${video.key}`}
+                                    width="350"
+                                    height="230"
+                                    frameborder="0"
+                                    allow="autoplay; fullscreen"
+                                ></iframe>
+                                <Typography variant='subtitle1'>{video.name}</Typography>
+                            </Box>
+                        ))}
                     </Stack>
                 </Box>
             </Stack>
