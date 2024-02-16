@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia, Chip, Container, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Card, CardMedia, Chip, Container, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { fetchFromAPI } from '../utils/fetchFromAPI';
 import { useParams } from 'react-router-dom';
@@ -24,7 +24,7 @@ const MovieDetail = () => {
     };
 
     useEffect(() => {
-        const detail_data = fetchFromAPI(`movie/${id}?append_to_response=videos`)
+        const detail_data = fetchFromAPI(`movie/${id}?append_to_response=videos,credits,images,reviews`)
         .then((data) => setDetail(data));
 
         const keywords_data = fetchFromAPI(`movie/${id}/keywords`)
@@ -77,9 +77,9 @@ const MovieDetail = () => {
                     </Stack>
                 </Box>
                 
-                <Box mt={10} pt={3} sx={{ borderTop: '1px solid gray' }}>
-                    <Typography variant='h4'>Trailers</Typography>
-                    <Slider {...sliderSettings}>
+                <Box mt={15} pt={3} sx={{ borderTop: '1px solid gray' }}>
+                    <Typography variant='h4' mb={2}>Trailers</Typography>
+                    <Slider {... { dots: true, infinite: true, speed: 500, slidesToShow: 3, slidesToScroll: 3 }}>
                         {detail && detail.videos.results.map((video, idx) => (
                             <Box ml={2} sx={{ width: "33%"}}>
                                 <iframe
@@ -90,6 +90,32 @@ const MovieDetail = () => {
                                     allow="autoplay; fullscreen"
                                 ></iframe>
                                 <Typography variant='subtitle1'>{video.name}</Typography>
+                            </Box>
+                        ))}
+                    </Slider>
+                </Box>
+
+                <Box mt={15} pt={3} sx={{ borderTop: '1px solid gray' }}>
+                    <Typography variant='h4' mb={2}>Cast</Typography>
+                    <Slider {... { dots: true, infinite: true, speed: 500, slidesToShow: 6, slidesToScroll: 6 }}>
+                        {detail?.credits?.cast.map((cast, idx) => (
+                            <Box sx={{ justifyContent: 'center', minWidth: "150px", textAlign: 'center' }}>
+                                <Box ml={4}>
+                                    <Avatar alt={cast.name} src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`} sx={{ width: 120, height: 120, border: '3px solid #fff' }}/>
+                                </Box>
+                                <Typography variant='subtitle1' fontWeight='bold' mt={1}>{cast.name}</Typography>
+                                <Typography variant='subtitle1' mt={1} sx={{ color: 'gray' }}>{cast.character}</Typography>
+                            </Box>
+                        ))}
+                    </Slider>
+                </Box>
+
+                <Box mt={15} pt={3} sx={{ borderTop: '1px solid gray' }}>
+                    <Typography variant='h4' mb={2}>Photos</Typography>
+                    <Slider {... { dots: true, infinite: true, speed: 500, slidesToShow: 3, slidesToScroll: 3 }}>
+                        {detail?.images?.backdrops?.map((image, idx) => (
+                            <Box ml={2} mr={2}>
+                                <img src={`https://image.tmdb.org/t/p/w500${image.file_path}`} alt="" width="360px" />
                             </Box>
                         ))}
                     </Slider>
