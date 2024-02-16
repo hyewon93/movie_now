@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardMedia, Chip, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import StarIcon from '@mui/icons-material/Star';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';

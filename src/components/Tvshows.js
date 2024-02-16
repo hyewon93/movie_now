@@ -26,7 +26,7 @@ const Tvshows = () => {
     }, [currentTab]);
 
     useEffect(() => {
-        const data = fetchFromAPI(apiUrl)
+        fetchFromAPI(apiUrl)
         .then((data) => {
             setTvshows(data.results);
             setTimeout(() => {
@@ -36,7 +36,7 @@ const Tvshows = () => {
     }, [apiUrl]);
 
     return (
-        <Stack sx={{ flexDirection: "column", background: '#141414'}}>
+        <Stack mt={15} sx={{ flexDirection: "column", background: '#141414'}}>
             {
             loading 
             ? 

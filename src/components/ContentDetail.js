@@ -59,7 +59,7 @@ const ContentDetail = ({ type }) => {
         <Container>
             {loading ? <Loading /> : null}
             <Box className="blurBackground" sx={{ backgroundImage: `linear-gradient( rgb(0 0 0 / 90%), rgb(0 0 0 / 90%) ), url('https://image.tmdb.org/t/p/w500${detail?.backdrop_path}')` }}></Box>
-            <Stack direction="column" sx={{ zIndex: 1, width: '100%', height: '100%', color: '#fff' }}>
+            <Stack mt={15} direction="column" sx={{ zIndex: 1, width: '100%', height: '100%', color: '#fff' }}>
                 <Box mb={15} mt={5}>
                     <Stack direction="row">
                         <Box mr={2} sx={{ width: '360px' }}>

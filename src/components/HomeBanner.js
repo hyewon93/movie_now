@@ -9,7 +9,7 @@ const HomeBanner = ({ item }) => {
     const [detail, setDetail] = useState();
 
     useEffect(() => {
-        const data = fetchFromAPI(`movie/${item.id}`)
+        fetchFromAPI(`movie/${item.id}`)
         .then((data) => setDetail(data));
     }, []);
 
