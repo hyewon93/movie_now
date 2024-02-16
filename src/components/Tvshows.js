@@ -29,31 +29,40 @@ const Tvshows = () => {
         const data = fetchFromAPI(apiUrl)
         .then((data) => {
             setTvshows(data.results);
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 300);
         });
     }, [apiUrl]);
 
     return (
         <Stack sx={{ flexDirection: "column", background: '#000'}}>
-            {loading ? <Loading /> : null}
-            <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
-                <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
-                    {currentTab} TV Shows
-                </Typography>
+            {
+            loading 
+            ? 
+            <Loading /> 
+            : 
+            <Box>
+                <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
+                    <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
+                        {currentTab} TV Shows
+                    </Typography>
+                </Box>
+                <Stack sx={{ flexDirection: "row", mt: 4, justifyContent: "center"}}>
+                    <TabButton tabName="Popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    <TabButton tabName="Airing Today" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    <TabButton tabName="On The Air" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    <TabButton tabName="Top Rated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                </Stack>
+                <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
+                    {tvshows.map((tvshow, idx) => (
+                        <Box key={idx}>
+                            <ContentCard type="tvshow" item={tvshow} />
+                        </Box>
+                    ))}
+                </Stack>
             </Box>
-            <Stack sx={{ flexDirection: "row", mt: 4, justifyContent: "center"}}>
-                <TabButton tabName="Popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                <TabButton tabName="Airing Today" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                <TabButton tabName="On The Air" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                <TabButton tabName="Top Rated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-            </Stack>
-            <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
-                {tvshows.map((tvshow, idx) => (
-                    <Box key={idx}>
-                        <ContentCard type="tvshow" item={tvshow} />
-                    </Box>
-                ))}
-            </Stack>
+            }
         </Stack>
     )
 }

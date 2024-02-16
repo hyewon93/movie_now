@@ -30,7 +30,7 @@ const ContentDetail = ({ type }) => {
                     setDetail(data);
                     setTimeout(() => {
                         setLoading(false);
-                    }, 1000);
+                    }, 500);
                 });
 
                 fetchFromAPI(`movie/${id}/keywords`)
@@ -42,7 +42,7 @@ const ContentDetail = ({ type }) => {
                     setDetail(data);
                     setTimeout(() => {
                         setLoading(false);
-                    }, 1000);
+                    }, 500);
                 });
     
                 fetchFromAPI(`tv/${id}/keywords`)
@@ -73,7 +73,7 @@ const ContentDetail = ({ type }) => {
                             </Card>
                         </Box>
                         <Box ml={2}>
-                            <Stack sx={{ height: '80%' }}>
+                            <Stack>
                                 <Typography variant='h3'>{type === 'movie' ? detail?.title : detail?.name}</Typography>
                                 <Typography variant='subtitle1' mt={3}>
                                     {detail?.genres.map((genre, idx) => (
@@ -92,11 +92,11 @@ const ContentDetail = ({ type }) => {
                                     <StarIcon sx={{ fontSize: 28, color: '#f8cc3f', mr: '5px' }} />
                                     {detail?.vote_average.toFixed(2)}
                                 </Typography>
-                                <Typography variant='h6' mt={4} sx={{ textAlign: 'justify' }}>
-                                    {detail?.overview.length > 230 ? detail?.overview.slice(0,230) + '...' : detail?.overview}
+                                <Typography variant='body1' mt={4} sx={{ textAlign: 'justify' }}>
+                                    {detail?.overview}
                                 </Typography>
                             </Stack>
-                            <Box sx={{ height: '10%' }}>
+                            <Box mt={5} mb={3}>
                                 {keywords?.map((keyword, idx) => (
                                     <Chip key={keyword.id} variant="outlined" label={'# ' + keyword.name} sx={{ border: '1px solid #e6b400', color: '#e6b400', fontSize: '16px', mr: '20px', mt: '13px' }}></Chip>
                                 ))}
@@ -124,7 +124,7 @@ const ContentDetail = ({ type }) => {
                                         frameBorder="0"
                                         allow="autoplay; fullscreen"
                                     ></iframe>
-                                    <Typography variant='subtitle1'>{video.name}</Typography>
+                                    <Typography variant='subtitle1' pl={1} pr={1}>{video.name}</Typography>
                                 </Box>
                             ))}
                         </Slider>

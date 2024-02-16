@@ -34,31 +34,40 @@ const Movies = () => {
         fetchFromAPI(apiUrl)
         .then((data) => {
             setMovies(data.results);
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
         });
     }, [apiUrl]);
 
     return (
         <Stack sx={{ flexDirection: "column", background: '#000'}}>
-            {loading ? <Loading /> : null}
-            <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
-                <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
-                    {currentTab} Movies
-                </Typography>
+            {
+            loading 
+            ? 
+            <Loading /> 
+            : 
+            <Box>
+                <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
+                    <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
+                        {currentTab} Movies
+                    </Typography>
+                </Box>
+                <Stack sx={{ flexDirection: "row", mt: 4, justifyContent: "center"}}>
+                    <TabButton tabName="Popular" apiUrl="popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    <TabButton tabName="Now Playing" apiUrl="now_playing" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    <TabButton tabName="Upcoming" apiUrl="upcoming" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    <TabButton tabName="Top Rated" apiUrl="topRated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                </Stack>
+                <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
+                    {movies.map((movie, idx) => (
+                        <Box key={idx}>
+                            <ContentCard type="movie" item={movie} />
+                        </Box>
+                    ))}
+                </Stack>
             </Box>
-            <Stack sx={{ flexDirection: "row", mt: 4, justifyContent: "center"}}>
-                <TabButton tabName="Popular" apiUrl="popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                <TabButton tabName="Now Playing" apiUrl="now_playing" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                <TabButton tabName="Upcoming" apiUrl="upcoming" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                <TabButton tabName="Top Rated" apiUrl="topRated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-            </Stack>
-            <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
-                {movies.map((movie, idx) => (
-                    <Box key={idx}>
-                        <ContentCard type="movie" item={movie} />
-                    </Box>
-                ))}
-            </Stack>
+            }   
         </Stack>
     )
 }
