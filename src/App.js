@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Movies from "./components/Movies";
 import Tvshows from "./components/Tvshows";
-import MovieDetail from "./components/MovieDetail";
+import ContentDetail from "./components/ContentDetail";
 
 const App = () => {
   return (
@@ -13,10 +13,11 @@ const App = () => {
       <Box>
         <Navbar />
         <Routes>
-          <Route path="/" exact element={<Home />}></Route>
+        <Route path="/" exact element={<Home />}></Route>
           <Route path="/movies" exact element={<Movies />}></Route>
           <Route path="/tvshows" element={<Tvshows />}></Route>
-          <Route path="/movie/:id" element={<MovieDetail />}></Route>
+          <Route path="/movie/:id" element={<ContentDetail type='movie' />}></Route>
+          <Route path="/tv/:id" element={<ContentDetail type='tv' />}></Route>
         </Routes>
       </Box>
     </BrowserRouter>
