@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { fetchFromAPI } from '../utils/fetchFromAPI';
 import { useParams } from 'react-router-dom';
 import StarIcon from '@mui/icons-material/Star';
+import Slider from 'react-slick';
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const MovieDetail = () => {
 
@@ -10,6 +14,14 @@ const MovieDetail = () => {
     const [keywords, setKeywords] = useState([]);
 
     const { id } = useParams();
+
+    const sliderSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 3
+    };
 
     useEffect(() => {
         const detail_data = fetchFromAPI(`movie/${id}?append_to_response=videos`)
@@ -67,9 +79,9 @@ const MovieDetail = () => {
                 
                 <Box mt={10} pt={3} sx={{ borderTop: '1px solid gray' }}>
                     <Typography variant='h4'>Trailers</Typography>
-                    <Stack direction="row" gap={5} mt={2}> 
+                    <Slider {...sliderSettings}>
                         {detail && detail.videos.results.map((video, idx) => (
-                            <Box>
+                            <Box ml={2} sx={{ width: "33%"}}>
                                 <iframe
                                     src={`https://www.youtube.com/embed/${video.key}`}
                                     width="350"
@@ -80,7 +92,7 @@ const MovieDetail = () => {
                                 <Typography variant='subtitle1'>{video.name}</Typography>
                             </Box>
                         ))}
-                    </Stack>
+                    </Slider>
                 </Box>
             </Stack>
         </Container>
