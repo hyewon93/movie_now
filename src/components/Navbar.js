@@ -2,6 +2,7 @@ import { AppBar, Box, Button, Container, CssBaseline, Toolbar } from '@mui/mater
 
 import logo from "../assets/movienow_logo.png";
 import { Link, useLocation } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 const Navbar = () => {
 
@@ -42,6 +43,7 @@ const Navbar = () => {
                                 </Button>
                             </Link>
                         </Box>
+                        <SearchBar />
                     </Toolbar>
                 </Container>
             </AppBar>

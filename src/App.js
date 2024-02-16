@@ -7,6 +7,7 @@ import Movies from "./components/Movies";
 import Tvshows from "./components/Tvshows";
 import ContentDetail from "./components/ContentDetail";
 import Footer from "./components/Footer";
+import SearchFeed from "./components/SearchFeed";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/tvshows" element={<Tvshows />}></Route>
           <Route path="/movie/:id" element={<ContentDetail type='movie' />}></Route>
           <Route path="/tv/:id" element={<ContentDetail type='tv' />}></Route>
+          <Route path="/search/:searchTerm" element={<SearchFeed />}></Route>
         </Routes>
         <Footer />
       </Box>
