@@ -9,24 +9,38 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Loading from './Loading';
 
 const MovieDetail = () => {
 
+    const [loading, setLoading]= useState(true);
     const [detail, setDetail] = useState();
     const [keywords, setKeywords] = useState([]);
 
     const { id } = useParams();
 
     useEffect(() => {
-        fetchFromAPI(`movie/${id}?append_to_response=videos,credits,images,reviews,recommendations`)
-        .then((data) => setDetail(data));
 
-        fetchFromAPI(`movie/${id}/keywords`)
-        .then((data) => setKeywords(data.keywords));
+        try{
+
+            fetchFromAPI(`movie/${id}?append_to_response=videos,credits,images,reviews,recommendations`)
+            .then((data) => {
+                setDetail(data);
+                setLoading(false);
+            });
+
+            fetchFromAPI(`movie/${id}/keywords`)
+            .then((data) => setKeywords(data.keywords));
+
+        } catch(error) {
+            console.log(error);
+        }
+        
     }, [id]);
 
     return (
         <Container>
+            {loading ? <Loading /> : null}
             <Box className="blurBackground" sx={{ backgroundImage: `linear-gradient( rgb(0 0 0 / 90%), rgb(0 0 0 / 90%) ), url('https://image.tmdb.org/t/p/w500${detail?.backdrop_path}')` }}>
                 {detail?.title}
             </Box>
@@ -128,11 +142,23 @@ const MovieDetail = () => {
                 <Box mb={15} pt={3} sx={{ borderTop: '1px solid gray' }}>
                     <Typography variant='h4' mb={2} sx={{ display: 'flex', verticalAlign: 'middle' }}>
                         <DragIndicatorIcon sx={{ fontSize: 40, color: '#e67300', mr: '5px' }} />
-                        Reviews
+                        Reviews ({detail?.reviews?.total_results})
                     </Typography>
-                    <Stack direction="row">
-                        
-                    </Stack>
+                    {detail?.reviews?.results?.slice(0,5).map((review) => (
+                        <Stack key={'review_' + review.id} direction="row" mt={5}>
+                            <Box ml={2}>
+                                <Avatar alt={review.author} src={`https://image.tmdb.org/t/p/w500${review.author_details.avatar_path}`} sx={{ width: 80, height: 80 }}/>
+                            </Box>
+                            <Box ml={4} mr={4} sx={{ textAlign: "justify"  }}>
+                                <Typography variant='subtitle2' sx={{ fontWeight: 'bold', display: 'flex', alignItems: 'center' }}>
+                                    {review.author} | {review.created_at.slice(0,10)} | <StarIcon sx={{ fontSize: 15, color: '#f8cc3f', ml: '3px' }} />{review.author_details.rating ? review.author_details.rating.toFixed(1) : '-'}
+                                </Typography>
+                                <Box mt={1} p={2} sx={{ border: "2px solid #fff"}}>
+                                    {review.content}
+                                </Box>
+                            </Box>
+                        </Stack>
+                    ))}
                 </Box>
 
                 <Box mb={15} pt={3} sx={{ borderTop: '1px solid gray' }}>

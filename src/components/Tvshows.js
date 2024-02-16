@@ -3,9 +3,11 @@ import { fetchFromAPI } from '../utils/fetchFromAPI';
 import { Box, Stack, Typography } from '@mui/material';
 import TabButton from './TabButton';
 import ContentCard from './ContentCard';
+import Loading from './Loading';
 
 const Tvshows = () => {
 
+    const [loading, setLoading]= useState(true);
     const [tvshows, setTvshows] = useState([]);
     const [currentTab, setCurrentTab] = useState("Popular");
     const [apiUrl, setApiUrl] = useState("tv/popular");
@@ -25,11 +27,15 @@ const Tvshows = () => {
 
     useEffect(() => {
         const data = fetchFromAPI(apiUrl)
-        .then((data) => setTvshows(data.results));
+        .then((data) => {
+            setTvshows(data.results);
+            setLoading(false);
+        });
     }, [apiUrl]);
 
     return (
         <Stack sx={{ flexDirection: "column", background: '#000'}}>
+            {loading ? <Loading /> : null}
             <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
                 <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
                     {currentTab} TV Shows

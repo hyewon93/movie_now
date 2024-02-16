@@ -3,9 +3,11 @@ import { fetchFromAPI } from '../utils/fetchFromAPI';
 import { Box, Stack, Typography } from '@mui/material';
 import ContentCard from './ContentCard';
 import TabButton from './TabButton';
+import Loading from './Loading';
 
 const Movies = () => {
 
+    const [loading, setLoading]= useState(true);
     const [movies, setMovies] = useState([]);
     const [currentTab, setCurrentTab] = useState("Popular");
     const [apiUrl, setApiUrl] = useState("movie/popular");
@@ -30,13 +32,15 @@ const Movies = () => {
     useEffect(() => {
 
         fetchFromAPI(apiUrl)
-        .then((data) => setMovies(data.results));
+        .then((data) => {
+            setMovies(data.results);
+            setLoading(false);
+        });
     }, [apiUrl]);
-
-    if(!movies) return 'Loading...';
 
     return (
         <Stack sx={{ flexDirection: "column", background: '#000'}}>
+            {loading ? <Loading /> : null}
             <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
                 <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
                     {currentTab} Movies

@@ -5,7 +5,7 @@ import StarIcon from '@mui/icons-material/Star';
 const ContentCard = ({ type, item }) => {
   return (
     <Card sx={{ width: { xs: '100%', sm: '230px', md: '230px'}, mt: 2, boxShadow: 'none', borderRadius: '7px'}}>
-      <Link to={`movie/${item.id}`} style={{ textDecoration: 'none' }}>
+      <Link to={`/movie/${item.id}`} style={{ textDecoration: 'none' }}>
         <CardMedia 
           component="img"
           image={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
