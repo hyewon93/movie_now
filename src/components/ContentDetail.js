@@ -30,7 +30,7 @@ const ContentDetail = ({ type }) => {
                     setDetail(data);
                     setTimeout(() => {
                         setLoading(false);
-                    }, 500);
+                    }, 300);
                 });
 
                 fetchFromAPI(`movie/${id}/keywords`)
@@ -42,7 +42,7 @@ const ContentDetail = ({ type }) => {
                     setDetail(data);
                     setTimeout(() => {
                         setLoading(false);
-                    }, 500);
+                    }, 300);
                 });
     
                 fetchFromAPI(`tv/${id}/keywords`)
@@ -63,7 +63,7 @@ const ContentDetail = ({ type }) => {
                 <Box mb={15} mt={5}>
                     <Stack direction="row">
                         <Box mr={2} sx={{ width: '360px' }}>
-                            <Card sx={{ boxShadow: 'none', borderRadius: '7px', backgroundColor: '#000' }}>
+                            <Card sx={{ boxShadow: 'none', borderRadius: '7px', backgroundColor: '#141414' }}>
                                 <CardMedia
                                     component="img"
                                     image={`https://image.tmdb.org/t/p/w500${detail?.poster_path}`}

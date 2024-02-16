@@ -6,7 +6,7 @@ import LiveTvIcon from '@mui/icons-material/LiveTv';
 
 const ContentCard = ({ key, type, item, isMix }) => {
   return (
-    <Card className="contentCard" key={key} sx={{ mt: 2, boxShadow: 'none', borderRadius: '7px', backgroundColor: '#000', width: '226px'}}>
+    <Card className="contentCard" key={key} sx={{ mt: 2, boxShadow: 'none', borderRadius: '7px', backgroundColor: '#141414', width: '226px'}}>
       <Link to={type === "movie" ? `/movie/${item.id}` : `/tv/${item.id}`} style={{ textDecoration: 'none' }}>
         {item.poster_path
           ?
@@ -23,7 +23,7 @@ const ContentCard = ({ key, type, item, isMix }) => {
         }
         
         <CardContent sx={{ height: 'auto', textAlign: 'center' }}>
-          <Typography variant="subtitle1" fontWeight="bold" color="#fff">
+          <Typography variant="subtitle1" color="#fff">
             {type === "movie" ? item.title : item.name}
           </Typography>
           {!isMix ?
@@ -33,7 +33,7 @@ const ContentCard = ({ key, type, item, isMix }) => {
             : null
           }
           
-          <Typography variant="subtitle2" color="#fff" justifyContent="center" sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold'}}>
+          <Typography mt={1} variant="subtitle2" color="#fff" justifyContent="center" sx={{ display: 'flex', alignItems: 'center'}}>
             {isMix ? (type === 'movie' ? 'Movie' : 'TV') : ''}
             <StarIcon sx={{ fontSize: 15, color: '#f8cc3f', mr: '5px', ml: '5px' }} />
             {item.vote_average.toFixed(2)}

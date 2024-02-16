@@ -9,7 +9,7 @@ const Navbar = () => {
 
     return (
         <CssBaseline>
-            <AppBar position="static" sx={{ background: "#000" }}>
+            <AppBar position="static" sx={{ background: "#141414" }}>
                 <Container maxWidth="x1">
                     <Toolbar disableGutters>
                         <Link to="/" style={{ textDecoration: 'none' }}>

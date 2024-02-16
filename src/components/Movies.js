@@ -41,7 +41,7 @@ const Movies = () => {
     }, [apiUrl]);
 
     return (
-        <Stack sx={{ flexDirection: "column", background: '#000'}}>
+        <Stack sx={{ flexDirection: "column", background: '#141414'}}>
             {
             loading 
             ? 

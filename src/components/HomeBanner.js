@@ -16,7 +16,7 @@ const HomeBanner = ({ item }) => {
     return (
         <Stack direction="row" justifyContent="center" p={5}>
             <Box mr={2} sx={{ width: '230px' }}>
-                <Card sx={{ boxShadow: 'none', borderRadius: '7px', backgroundColor: '#000' }}>
+                <Card sx={{ boxShadow: 'none', borderRadius: '7px', backgroundColor: '#141414' }}>
                     <CardMedia
                         component="img"
                         image={`https://image.tmdb.org/t/p/w500${item.poster_path}`}

@@ -22,7 +22,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Stack direction="column" sx={{ color: '#fff', backgroundColor: '#000', width: '100%', maxWidth: 'none' }}>
+    <Stack direction="column" sx={{ color: '#fff', backgroundColor: '#141414', width: '100%', maxWidth: 'none' }}>
       {
         loading 
         ? 
