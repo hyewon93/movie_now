@@ -1,26 +1,41 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Chip, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import StarIcon from '@mui/icons-material/Star';
+import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import LiveTvIcon from '@mui/icons-material/LiveTv';
 
-const ContentCard = ({ type, item }) => {
+const ContentCard = ({ key, type, item, isMix }) => {
   return (
-    <Card sx={{ width: { xs: '100%', sm: '230px', md: '230px'}, mt: 2, boxShadow: 'none', borderRadius: '7px'}}>
-      <Link to={`/movie/${item.id}`} style={{ textDecoration: 'none' }}>
-        <CardMedia 
-          component="img"
-          image={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-          alt={item.title}
-          sx={{ width: {xs: '100%', sm: '230px', md: '230px'}, height: '340px'}}
-        />
-        <CardContent sx={{ backgroundColor: '#000', height: 'auto', textAlign: 'center' }}>
+    <Card className="contentCard" key={key} sx={{ mt: 2, boxShadow: 'none', borderRadius: '7px', backgroundColor: '#000', width: '226px'}}>
+      <Link to={type === "movie" ? `/movie/${item.id}` : `/tv/${item.id}`} style={{ textDecoration: 'none' }}>
+        {item.poster_path
+          ?
+          <CardMedia 
+            component="img"
+            image={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+            alt={item.title}
+            sx={{ height: '340px', borderRadius: '7px'}}
+          />
+          :
+          <Box sx={{ height: '340px', justifyContent: 'center', display: 'flex', alignItems: 'center'}}>
+            {type === 'movie' ? <LocalMoviesIcon sx={{ width: '100px', height: '100px', color: 'gray' }}/> : <LiveTvIcon sx={{ width: '100px', height: '100px', color: 'gray' }}/> }
+          </Box>
+        }
+        
+        <CardContent sx={{ height: 'auto', textAlign: 'center' }}>
           <Typography variant="subtitle1" fontWeight="bold" color="#fff">
             {type === "movie" ? item.title : item.name}
           </Typography>
-          <Typography variant="subtitle2" color="#fff" sx={{ mt: 1}}>
-            {type === "movie" ? item.release_date : ""}
-          </Typography>
+          {!isMix ?
+            <Typography variant="subtitle2" color="#fff" sx={{ mt: 1}}>
+              {type === "movie" ? item.release_date : ""}
+            </Typography>
+            : null
+          }
+          
           <Typography variant="subtitle2" color="#fff" justifyContent="center" sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold'}}>
-            <StarIcon sx={{ fontSize: 15, color: '#f8cc3f', mr: '5px' }} />
+            {isMix ? (type === 'movie' ? 'Movie' : 'TV') : ''}
+            <StarIcon sx={{ fontSize: 15, color: '#f8cc3f', mr: '5px', ml: '5px' }} />
             {item.vote_average.toFixed(2)}
           </Typography>
         </CardContent>

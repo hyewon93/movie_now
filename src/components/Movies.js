@@ -52,7 +52,7 @@ const Movies = () => {
                 <TabButton tabName="Upcoming" apiUrl="upcoming" currentTab={currentTab} setCurrentTab={setCurrentTab} />
                 <TabButton tabName="Top Rated" apiUrl="topRated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
             </Stack>
-            <Stack direction="row" flexWrap="wrap" justifyContent="center" gap={2}>
+            <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
                 {movies.map((movie, idx) => (
                     <Box key={idx}>
                         <ContentCard type="movie" item={movie} />

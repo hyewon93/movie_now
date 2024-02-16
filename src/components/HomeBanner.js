@@ -36,11 +36,11 @@ const HomeBanner = ({ item }) => {
                     <Typography variant='subtitle1'>
                         {detail && detail.release_date.split('-')[0] + ' • ' + detail.runtime + ' min'}
                     </Typography>
-                    <Typography variant='subtitle1' mt={1} sx={{ fontWeight: 'bold', display: 'flex', verticalAlign: 'middle' }}>
-                        <StarIcon sx={{ fontSize: 15, color: '#f8cc3f', mr: '5px' }} />
+                    <Typography variant='subtitle1' mt={2} sx={{ fontWeight: 'bold', display: 'flex', verticalAlign: 'middle' }}>
+                        <StarIcon sx={{ fontSize: 25, color: '#f8cc3f', mr: '5px' }} />
                         {detail && detail.vote_average.toFixed(2)}
                     </Typography>
-                    <Typography variant='body1' mt={1} sx={{ textAlign: 'justify' }}>
+                    <Typography variant='body1' mt={2} sx={{ textAlign: 'justify' }}>
                         {detail && (detail.overview.length > 193 ? detail.overview.slice(0,193) + '...' : detail.overview)}
                     </Typography>
                 </Box>

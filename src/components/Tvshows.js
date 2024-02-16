@@ -47,7 +47,7 @@ const Tvshows = () => {
                 <TabButton tabName="On The Air" currentTab={currentTab} setCurrentTab={setCurrentTab} />
                 <TabButton tabName="Top Rated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
             </Stack>
-            <Stack direction="row" flexWrap="wrap" justifyContent="center" gap={2}>
+            <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
                 {tvshows.map((tvshow, idx) => (
                     <Box key={idx}>
                         <ContentCard type="tvshow" item={tvshow} />

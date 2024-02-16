@@ -13,6 +13,13 @@
     color: #fff;
 }
 
+.homeGradientText {
+    background: radial-gradient(circle, rgba(231,37,4,1) 0%, rgba(230,180,0,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold !important;
+}
+
 .tabButton.active {
     color: #e67300;
     border: 2px solid #e67300;
@@ -42,4 +49,20 @@
     background-position: center;
     z-index: -999999;
     transform: scale(1.02);
+}
+
+.movieChip {
+    background-color: #e67300 !important;
+    border-radius: 5px !important;
+    color: #000 !important;
+}
+
+.tvChip {
+    background-color: #e6b400 !important;
+    border-radius: 5px !important;
+    color: #000 !important;
+}
+
+.contentCard:hover {
+    transform: scale(1.05);
 }
