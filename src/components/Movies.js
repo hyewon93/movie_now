@@ -28,9 +28,12 @@ const Movies = () => {
     }, [currentTab]);
 
     useEffect(() => {
-        const data = fetchFromAPI(apiUrl)
+
+        fetchFromAPI(apiUrl)
         .then((data) => setMovies(data.results));
     }, [apiUrl]);
+
+    if(!movies) return 'Loading...';
 
     return (
         <Stack sx={{ flexDirection: "column", background: '#000'}}>
