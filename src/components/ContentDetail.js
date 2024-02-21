@@ -22,6 +22,8 @@ const ContentDetail = ({ type }) => {
 
     useEffect(() => {
 
+        setLoading(true);
+
         try{
 
             if(type === 'movie') {
@@ -30,7 +32,7 @@ const ContentDetail = ({ type }) => {
                     setDetail(data);
                     setTimeout(() => {
                         setLoading(false);
-                    }, 300);
+                    }, 500);
                 });
 
                 fetchFromAPI(`movie/${id}/keywords`)
@@ -42,7 +44,7 @@ const ContentDetail = ({ type }) => {
                     setDetail(data);
                     setTimeout(() => {
                         setLoading(false);
-                    }, 300);
+                    }, 500);
                 });
     
                 fetchFromAPI(`tv/${id}/keywords`)
@@ -167,17 +169,19 @@ const ContentDetail = ({ type }) => {
                             ))}
                         </Slider>
                         :
-                        detail?.credits?.cast.map((cast, idx) => (
-                            <Stack direction="column" key={'cast_'+cast.id} sx={{ justifyContent: 'center', width: "150px", textAlign: 'center'}}>
-                                <Box ml={4}>
-                                    <Avatar alt={cast.name} src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`} sx={{ width: 120, height: 120, border: '3px solid #fff' }}/>
-                                </Box>
-                                <Box ml={4}>
-                                    <Typography variant='subtitle1' fontWeight='bold' mt={1}>{cast.name}</Typography>
-                                    <Typography variant='subtitle1' mt={1} sx={{ color: 'gray' }}>{cast.character}</Typography>
-                                </Box>
-                            </Stack>
-                        ))
+                        <Stack direction="row">
+                            {detail?.credits?.cast.map((cast, idx) => (
+                                <Stack direction="column" key={'cast_'+cast.id} sx={{ justifyContent: 'center', width: "150px", textAlign: 'center'}}>
+                                    <Box ml={4} sx={{ height: 120 }}>
+                                        <Avatar alt={cast.name} src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`} sx={{ width: 120, height: 120, border: '3px solid #fff' }}/>
+                                    </Box>
+                                    <Box ml={4} sx ={{ height: 150}}>
+                                        <Typography variant='subtitle1' fontWeight='bold' mt={1}>{cast.name}</Typography>
+                                        <Typography variant='subtitle1' mt={1} sx={{ color: 'gray' }}>{cast.character}</Typography>
+                                    </Box>
+                                </Stack>
+                            ))}
+                        </Stack>
                     }
                     
                 </Box>

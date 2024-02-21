@@ -8,10 +8,12 @@ import Tvshows from "./components/Tvshows";
 import ContentDetail from "./components/ContentDetail";
 import Footer from "./components/Footer";
 import SearchFeed from "./components/SearchFeed";
+import ScrollToTop from "./routes/ScrollToTop";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Box>
         <Navbar />
         <Routes>
