@@ -4,41 +4,58 @@ import { Box, Stack, Typography } from '@mui/material';
 import ContentCard from './ContentCard';
 import TabButton from './TabButton';
 import Loading from './Loading';
+import Pagination from 'react-js-pagination';
 
 const Movies = () => {
 
     const [loading, setLoading]= useState(true);
     const [movies, setMovies] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalResults, setTotalResults] = useState(0);
     const [currentTab, setCurrentTab] = useState("Popular");
     const [apiUrl, setApiUrl] = useState("movie/popular");
 
     useEffect(() => {
+
+        setCurrentPage(1);
+
+    }, [currentTab]);
+
+    useEffect(() => {
+
+        setLoading(true);
 
         const today = new Date();
         const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
         const formattedNextDate = `${today.getFullYear() + 1}-${today.getMonth() + 1}-${today.getDate()}`;
 
         if(currentTab === "Popular") 
-            setApiUrl("movie/popular");
+            setApiUrl(`movie/popular?page=${currentPage}`);
         else if(currentTab === "Now Playing")
-            setApiUrl("movie/now_playing");
+            setApiUrl(`movie/now_playing?page=${currentPage}`);
         else if(currentTab === "Upcoming")
-            setApiUrl(`discover/movie?primary_release_date.gte=${formattedDate}&primary_release_date.lte=${formattedNextDate}&sort_by=primary_release_date.asc`);
+            setApiUrl(`discover/movie?primary_release_date.gte=${formattedDate}&primary_release_date.lte=${formattedNextDate}&sort_by=primary_release_date.asc&page=${currentPage}`);
         else if(currentTab === "Top Rated")
-            setApiUrl("movie/top_rated");
+            setApiUrl(`movie/top_rated?page=${currentPage}`);
 
-    }, [currentTab]);
+        window.scrollTo(0, 0);
+
+    }, [currentTab, currentPage]);
 
     useEffect(() => {
 
         fetchFromAPI(apiUrl)
         .then((data) => {
             setMovies(data.results);
-            setTimeout(() => {
-                setLoading(false);
-            }, 1000);
+            // max_page in TMDB: 500 (total 10,000 results)
+            setTotalResults(data.total_results > 10000 ? 10000 : data.total_results);
+            setLoading(false);
         });
     }, [apiUrl]);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
     return (
         <Stack mt={15} sx={{ flexDirection: "column", background: '#141414', }}>
@@ -53,7 +70,7 @@ const Movies = () => {
                         {currentTab} Movies
                     </Typography>
                 </Box>
-                <Stack sx={{ flexDirection: "row", mt: 4, justifyContent: "center"}}>
+                <Stack sx={{ flexDirection: "row", mt: 4, mb: 4, justifyContent: "center"}}>
                     <TabButton tabName="Popular" apiUrl="popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
                     <TabButton tabName="Now Playing" apiUrl="now_playing" currentTab={currentTab} setCurrentTab={setCurrentTab} />
                     <TabButton tabName="Upcoming" apiUrl="upcoming" currentTab={currentTab} setCurrentTab={setCurrentTab} />
@@ -66,6 +83,17 @@ const Movies = () => {
                         </Box>
                     ))}
                 </Stack>
+                <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
+                    <Pagination
+                        activePage={currentPage}
+                        totalItemsCount={totalResults}
+                        itemsCountPerPage={20}
+                        pageRangeDisplayed={5}
+                        prevPageText='<'
+                        nextPageText='>'
+                        onChange={handlePageChange}
+                    />
+                </Box>
             </Box>
             }   
         </Stack>

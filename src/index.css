@@ -121,3 +121,45 @@ h1,h2,h3,h4,h5,h6,p {
 .contentCard:hover {
     transform: scale(1.05);
 }
+
+.pagination {
+    li {
+        display: inline-block;
+        border: 1px solid #141414;
+        border-radius: 8px;
+        margin: 5px;
+        cursor: pointer;
+        height: 35px;
+        text-align: center;
+        padding: 5px;
+        min-width: 35px;
+
+        a {
+            color: #fff;
+            text-decoration-line: none;
+            padding: 3px;
+        }
+    }
+
+    li:hover {
+        border: 1px solid #e67300;
+        border-radius: 3px;
+
+        a {
+            color: #e67300
+        }
+    }
+
+    li.active {
+        background-color: #e67300;
+        pointer-events : none;
+        font-weight: bold;
+    }
+
+    li.disabled {
+        pointer-events : none;
+        a {
+            color: gray;
+        }
+    }
+}
