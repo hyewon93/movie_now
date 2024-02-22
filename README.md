@@ -13,10 +13,12 @@ https://movienow1.netlify.app
 ## 📚 Stack
 
 ### Development
-<img src="https://img.shields.io/badge/react-000000?style=for-the-badge&logo=react&logoColor=##61DAFB"> 
-<img alt="Material UI" src ="https://img.shields.io/badge/material%20ui-007FFF?style=for-the-badge&logo=mui&logoColor=white"/>
-<img alt="JavaScript" src ="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
-<img alt="Axios" src ="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/>
+<div>
+    <img src="https://img.shields.io/badge/react-000000?style=for-the-badge&logo=react&logoColor=##61DAFB"> 
+    <img alt="Material UI" src ="https://img.shields.io/badge/material%20ui-007FFF?style=for-the-badge&logo=mui&logoColor=white"/>
+    <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+    <img alt="Axios" src ="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/>
+</div>
 
 ### Environment
 <div>
