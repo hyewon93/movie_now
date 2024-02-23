@@ -5,6 +5,7 @@ import ContentCard from './ContentCard';
 import TabButton from './TabButton';
 import Loading from './Loading';
 import Pagination from 'react-js-pagination';
+import { useMediaQuery } from 'react-responsive';
 
 const Movies = () => {
 
@@ -14,6 +15,15 @@ const Movies = () => {
     const [totalResults, setTotalResults] = useState(0);
     const [currentTab, setCurrentTab] = useState("Popular");
     const [apiUrl, setApiUrl] = useState("movie/popular");
+
+    const Mobile = ({ children }) => {
+        const isMobile = useMediaQuery({ maxWidth: 767 })
+        return isMobile ? children : null
+    }
+    const Default = ({ children }) => {
+        const isNotMobile = useMediaQuery({ minWidth: 768 })
+        return isNotMobile ? children : null
+    }
 
     useEffect(() => {
 
@@ -65,24 +75,47 @@ const Movies = () => {
             <Loading /> 
             : 
             <Box>
-                <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
-                    <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
-                        {currentTab} Movies
-                    </Typography>
-                </Box>
-                <Stack sx={{ flexDirection: "row", mt: 4, mb: 4, justifyContent: "center"}}>
-                    <TabButton tabName="Popular" apiUrl="popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                    <TabButton tabName="Now Playing" apiUrl="now_playing" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                    <TabButton tabName="Upcoming" apiUrl="upcoming" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                    <TabButton tabName="Top Rated" apiUrl="topRated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                </Stack>
-                <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
-                    {movies.map((movie, idx) => (
-                        <Box key={idx}>
-                            <ContentCard type="movie" item={movie} />
-                        </Box>
-                    ))}
-                </Stack>
+                <Default>
+                    <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
+                        <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
+                            {currentTab} Movies
+                        </Typography>
+                    </Box>
+                    <Stack sx={{ flexDirection: "row", mt: 4, mb: 4, justifyContent: "center"}}>
+                        <TabButton tabName="Popular" apiUrl="popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="Now Playing" apiUrl="now_playing" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="Upcoming" apiUrl="upcoming" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="Top Rated" apiUrl="topRated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    </Stack>
+                    <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
+                        {movies.map((movie, idx) => (
+                            <Box key={idx}>
+                                <ContentCard type="movie" item={movie} />
+                            </Box>
+                        ))}
+                    </Stack>    
+                </Default>
+                <Mobile>
+                    <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
+                        <Typography variant="h4" sx={{ mt: 1.5, color: '#fff' }}>
+                            {currentTab} Movies
+                        </Typography>
+                    </Box>
+                    <Stack sx={{ flexDirection: "row", mt: 4, mb: 4, ml: 1, justifyContent: "center"}}>
+                        <TabButton tabName="Popular" apiUrl="popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="Now Playing" apiUrl="now_playing" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="Upcoming" apiUrl="upcoming" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="Top Rated" apiUrl="topRated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    </Stack>
+                    <Stack direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
+                        {movies.map((movie, idx) => (
+                            <Box key={idx}>
+                                <ContentCard type="movie" item={movie} />
+                            </Box>
+                        ))}
+                    </Stack>
+                </Mobile>
+                
                 <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
                     <Pagination
                         activePage={currentPage}

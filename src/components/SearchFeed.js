@@ -7,6 +7,7 @@ import Loading from './Loading';
 import { Typography } from '@mui/material';
 import TabButton from './TabButton';
 import Pagination from 'react-js-pagination';
+import SearchBar from './SearchBar';
 
 const SearchFeed = () => {
 
@@ -60,33 +61,41 @@ const SearchFeed = () => {
             <Loading /> 
             :
             <Box>
-                <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
-                    <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
-                        Search Results
-                    </Typography>
-                </Box>
-                <Stack sx={{ flexDirection: "row", mt: 4, mb: 4, justifyContent: "center"}}>
-                    <TabButton tabName="Movies" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                    <TabButton tabName="TV Shows" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                </Stack>
-                <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
-                    {results.map((results, idx) => (
-                        <Box key={idx}>
-                            <ContentCard type={currentTab === 'Movies' ? 'movie' : 'tv'} item={results} />
-                        </Box>
-                    ))}
-                </Stack>
-                <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
-                    <Pagination
-                        activePage={currentPage}
-                        totalItemsCount={totalResults}
-                        itemsCountPerPage={20}
-                        pageRangeDisplayed={5}
-                        prevPageText='<'
-                        nextPageText='>'
-                        onChange={handlePageChange}
-                    />
-                </Box>
+                {searchTerm !== undefined ?
+                <>
+                    <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
+                        <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
+                            Search Results
+                        </Typography>
+                    </Box>
+                    <Stack sx={{ flexDirection: "row", mt: 4, mb: 4, justifyContent: "center"}}>
+                        <TabButton tabName="Movies" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="TV Shows" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    </Stack>
+                    <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
+                        {results.map((results, idx) => (
+                            <Box key={idx}>
+                                <ContentCard type={currentTab === 'Movies' ? 'movie' : 'tv'} item={results} />
+                            </Box>
+                        ))}
+                    </Stack>
+                    <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
+                        <Pagination
+                            activePage={currentPage}
+                            totalItemsCount={totalResults}
+                            itemsCountPerPage={20}
+                            pageRangeDisplayed={5}
+                            prevPageText='<'
+                            nextPageText='>'
+                            onChange={handlePageChange}
+                        />
+                    </Box>
+                </>
+                :
+                <>
+                    <SearchBar />
+                </>
+                }
             </Box>
             }
         </Stack>

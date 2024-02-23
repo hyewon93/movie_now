@@ -22,6 +22,7 @@ const App = () => {
           <Route path="/tvshows" element={<Tvshows />}></Route>
           <Route path="/movie/:id" element={<ContentDetail type='movie' />}></Route>
           <Route path="/tv/:id" element={<ContentDetail type='tv' />}></Route>
+          <Route path="/search" element={<SearchFeed />}></Route>
           <Route path="/search/:searchTerm" element={<SearchFeed />}></Route>
         </Routes>
         <Footer />

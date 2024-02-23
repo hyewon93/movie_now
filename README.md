@@ -10,7 +10,7 @@ https://movienow1.netlify.app
 
 
 
-## 📚 Stack
+## 🔥 Stack
 
 ### Development
 <div>

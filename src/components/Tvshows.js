@@ -5,6 +5,7 @@ import TabButton from './TabButton';
 import ContentCard from './ContentCard';
 import Loading from './Loading';
 import Pagination from 'react-js-pagination';
+import { useMediaQuery } from 'react-responsive';
 
 const Tvshows = () => {
 
@@ -14,6 +15,15 @@ const Tvshows = () => {
     const [totalResults, setTotalResults] = useState(0);
     const [currentTab, setCurrentTab] = useState("Popular");
     const [apiUrl, setApiUrl] = useState("tv/popular");
+
+    const Mobile = ({ children }) => {
+        const isMobile = useMediaQuery({ maxWidth: 767 })
+        return isMobile ? children : null
+    }
+    const Default = ({ children }) => {
+        const isNotMobile = useMediaQuery({ minWidth: 768 })
+        return isNotMobile ? children : null
+    }
 
     useEffect(() => {
 
@@ -62,24 +72,47 @@ const Tvshows = () => {
             <Loading /> 
             : 
             <Box>
-                <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
-                    <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
-                        {currentTab} TV Shows
-                    </Typography>
-                </Box>
-                <Stack sx={{ flexDirection: "row", mt: 4, mb: 4, justifyContent: "center"}}>
-                    <TabButton tabName="Popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                    <TabButton tabName="Airing Today" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                    <TabButton tabName="On The Air" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                    <TabButton tabName="Top Rated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
-                </Stack>
-                <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
-                    {tvshows.map((tvshow, idx) => (
-                        <Box key={idx}>
-                            <ContentCard type="tvshow" item={tvshow} />
-                        </Box>
-                    ))}
-                </Stack>
+                <Default>
+                    <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
+                        <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
+                            {currentTab} TV Shows
+                        </Typography>
+                    </Box>
+                    <Stack sx={{ flexDirection: "row", mt: 4, mb: 4, justifyContent: "center"}}>
+                        <TabButton tabName="Popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="Airing Today" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="On The Air" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="Top Rated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    </Stack>
+                    <Stack ml={15} mr={15} direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
+                        {tvshows.map((tvshow, idx) => (
+                            <Box key={idx}>
+                                <ContentCard type="tvshow" item={tvshow} />
+                            </Box>
+                        ))}
+                    </Stack>
+                </Default>
+                <Mobile>
+                    <Box sx={{ mt: 4, mb: 2, textAlign: "center"}}>
+                        <Typography variant="h3" sx={{ mt: 1.5, color: '#fff' }}>
+                            {currentTab} TV Shows
+                        </Typography>
+                    </Box>
+                    <Stack sx={{ flexDirection: "row", mt: 4, mb: 4, ml: 1, justifyContent: "center"}}>
+                        <TabButton tabName="Popular" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="Airing Today" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="On The Air" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                        <TabButton tabName="Top Rated" currentTab={currentTab} setCurrentTab={setCurrentTab} />
+                    </Stack>
+                    <Stack direction="row" flexWrap="wrap" justifyContent="center" spacing={2}>
+                        {tvshows.map((tvshow, idx) => (
+                            <Box key={idx}>
+                                <ContentCard type="tvshow" item={tvshow} />
+                            </Box>
+                        ))}
+                    </Stack>
+                </Mobile>
+                
                 <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
                     <Pagination
                         activePage={currentPage}
